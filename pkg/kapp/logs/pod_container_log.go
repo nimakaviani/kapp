@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/cppforlife/go-cli-ui/ui"
+	"github.com/fatih/color"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	typedcorev1 "k8s.io/client-go/kubernetes/typed/core/v1"
@@ -66,13 +67,10 @@ func (l PodContainerLog) Tail(ui ui.UI, cancelCh chan struct{}) error {
 
 	reader := bufio.NewReader(stream)
 
-	ui.BeginLinef("%s# starting tailing '%s' logs\n", linePrefix, l.tag)
-
 	for {
 		line, err := reader.ReadBytes('\n')
 		if err != nil {
 			if err == io.EOF {
-				ui.BeginLinef("%s# ending tailing '%s' logs\n", linePrefix, l.tag)
 				return nil
 			}
 			typedCanceled, ok := streamCanceled.Load().(bool)
@@ -83,9 +81,9 @@ func (l PodContainerLog) Tail(ui ui.UI, cancelCh chan struct{}) error {
 		}
 
 		if l.opts.ContainerTag {
-			ui.PrintBlock([]byte(fmt.Sprintf("%s%s | %s", linePrefix, l.tag, line)))
+			ui.PrintBlock([]byte(fmt.Sprintf("%s | %s", color.New(color.Bold).Sprintf("%s%s", linePrefix, l.tag), line)))
 		} else {
-			ui.PrintBlock([]byte(fmt.Sprintf("%s%s", linePrefix, line)))
+			ui.PrintBlock([]byte(fmt.Sprintf("%s | %s", color.New(color.Bold).Sprintf("%s", linePrefix), line)))
 		}
 	}
 }
