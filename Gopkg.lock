@@ -67,20 +67,11 @@
   revision = "5c4f53402506fa5100563e9a831feb6d65a95eaf"
 
 [[projects]]
-  branch = "master"
-  digest = "1:71570cb9af58f4981cd3b6ac9902b37e978e1f3c34f35a04a3a4837ea542500f"
+  digest = "1:bb50c52715ad389a1f8dbf6df68c4ef38f73769524f00d49fed3dc8b280f3a54"
   name = "github.com/cppforlife/go-patch"
   packages = ["patch"]
   pruneopts = "NUT"
-  revision = "250da0e0e68ce3367b4302f34218f6c064eb9559"
-
-[[projects]]
-  digest = "1:7cb4fdca4c251b3ef8027c90ea35f70c7b661a593b9eeae34753c65499098bb1"
-  name = "github.com/cpuguy83/go-md2man"
-  packages = ["md2man"]
-  pruneopts = "NUT"
-  revision = "20f5889cbdc3c73dbd2862796665e7c465ade7d1"
-  version = "v1.0.8"
+  revision = "90228d47281247384683e5fded0f15afa3e5d29a"
 
 [[projects]]
   digest = "1:7a6852b35eb5bbc184561443762d225116ae630c26a7c4d90546619f1e7d2ad2"
@@ -275,20 +266,9 @@
   version = "v2.0.1"
 
 [[projects]]
-  digest = "1:bcfa8e184764796499312e55cd8a5fff63896eca0d6faff6b6e43ac6a98a498a"
-  name = "github.com/russross/blackfriday"
-  packages = ["."]
-  pruneopts = "NUT"
-  revision = "55d61fa8aa702f59229e6cff85793c22e580eaf5"
-  version = "v1.5.1"
-
-[[projects]]
-  digest = "1:f3cd75f81ee2b143bd354d906370261e94fc58e66dd5d632e1d6cde828338741"
+  digest = "1:343d44e06621142ab09ae0c76c1799104cdfddd3ffb445d78b1adf8dc3ffaf3d"
   name = "github.com/spf13/cobra"
-  packages = [
-    ".",
-    "doc",
-  ]
+  packages = ["."]
   pruneopts = "NUT"
   revision = "ef82de70bb3f60c65fb8eebacbb2d122ef517385"
   version = "v0.0.3"
@@ -427,7 +407,7 @@
   version = "v2.2.1"
 
 [[projects]]
-  digest = "1:8960ef753a87391086a307122d23cd5007cee93c28189437e4f1b6ed72bffc50"
+  digest = "1:4485f6050feae6844efd79bce3f5b35e5ed4a21dd79ef6a2dbbee263531cea09"
   name = "k8s.io/api"
   packages = [
     "admissionregistration/v1alpha1",
@@ -441,10 +421,12 @@
     "authorization/v1beta1",
     "autoscaling/v1",
     "autoscaling/v2beta1",
+    "autoscaling/v2beta2",
     "batch/v1",
     "batch/v1beta1",
     "batch/v2alpha1",
     "certificates/v1beta1",
+    "coordination/v1beta1",
     "core/v1",
     "events/v1beta1",
     "extensions/v1beta1",
@@ -461,11 +443,11 @@
     "storage/v1beta1",
   ]
   pruneopts = "NUT"
-  revision = "072894a440bdee3a891dea811fe42902311cd2a3"
-  version = "kubernetes-1.11.0"
+  revision = "9ad12a4af32677db3ae70bef3371bf9b618eb3a0"
+  version = "kubernetes-1.12.9"
 
 [[projects]]
-  digest = "1:601c49b6c5632c6a614849a4c1ab3577f8a4bfd2bdc1b53283fda61ec647d2ed"
+  digest = "1:cf808adb173dc3cf84d3cce08676a65bff8814cfe2cd4820aa54c53f7b483ae9"
   name = "k8s.io/apimachinery"
   packages = [
     "pkg/api/errors",
@@ -494,6 +476,7 @@
     "pkg/util/framer",
     "pkg/util/intstr",
     "pkg/util/json",
+    "pkg/util/naming",
     "pkg/util/net",
     "pkg/util/runtime",
     "pkg/util/sets",
@@ -506,11 +489,11 @@
     "third_party/forked/golang/reflect",
   ]
   pruneopts = "NUT"
-  revision = "103fd098999dc9c0c88536f5c9ad2e5da39373ae"
-  version = "kubernetes-1.11.0"
+  revision = "01f179d85dbce0f2e0e4351a92394b38694b7cae"
+  version = "kubernetes-1.12.9"
 
 [[projects]]
-  digest = "1:646688752261a5acd4a530a7865f4335049a3f8a5c0fe8645bce93a4e17ef222"
+  digest = "1:0f10e755a6e63e3927f64adea9313ccfe02a4f8dbf0b8f4673d8bcdeebc818e4"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
@@ -528,10 +511,12 @@
     "kubernetes/typed/authorization/v1beta1",
     "kubernetes/typed/autoscaling/v1",
     "kubernetes/typed/autoscaling/v2beta1",
+    "kubernetes/typed/autoscaling/v2beta2",
     "kubernetes/typed/batch/v1",
     "kubernetes/typed/batch/v1beta1",
     "kubernetes/typed/batch/v2alpha1",
     "kubernetes/typed/certificates/v1beta1",
+    "kubernetes/typed/coordination/v1beta1",
     "kubernetes/typed/core/v1",
     "kubernetes/typed/events/v1beta1",
     "kubernetes/typed/extensions/v1beta1",
@@ -575,8 +560,8 @@
     "util/jsonpath",
   ]
   pruneopts = "NUT"
-  revision = "7d04d0e2a0a1a4d4a1cd6baa432a2301492e4e65"
-  version = "kubernetes-1.11.0"
+  revision = "4f3abb12cae2d6817e1b6d72d9cbc3d3a6ddf965"
+  version = "kubernetes-1.12.9"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -594,8 +579,10 @@
     "github.com/ghodss/yaml",
     "github.com/mitchellh/go-wordwrap",
     "github.com/spf13/cobra",
-    "github.com/spf13/cobra/doc",
     "github.com/spf13/pflag",
+    "gopkg.in/yaml.v2",
+    "k8s.io/api/apps/v1",
+    "k8s.io/api/batch/v1",
     "k8s.io/api/core/v1",
     "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
@@ -605,11 +592,14 @@
     "k8s.io/apimachinery/pkg/selection",
     "k8s.io/apimachinery/pkg/types",
     "k8s.io/apimachinery/pkg/util/duration",
+    "k8s.io/apimachinery/pkg/util/validation",
     "k8s.io/apimachinery/pkg/util/wait",
     "k8s.io/apimachinery/pkg/util/yaml",
     "k8s.io/apimachinery/pkg/watch",
+    "k8s.io/client-go/discovery",
     "k8s.io/client-go/dynamic",
     "k8s.io/client-go/kubernetes",
+    "k8s.io/client-go/kubernetes/scheme",
     "k8s.io/client-go/kubernetes/typed/core/v1",
     "k8s.io/client-go/plugin/pkg/client/auth",
     "k8s.io/client-go/rest",

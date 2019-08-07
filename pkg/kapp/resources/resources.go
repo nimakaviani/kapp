@@ -196,7 +196,7 @@ func (c *Resources) Create(resource Resource) (Resource, error) {
 	var createdUn *unstructured.Unstructured
 
 	err = util.Retry(time.Second, time.Minute, func() (bool, error) {
-		createdUn, err = resClient.Create(resource.unstructuredPtr())
+		createdUn, err = resClient.Create(resource.unstructuredPtr(), metav1.CreateOptions{})
 		if err != nil {
 			return c.doneRetryingErr(err), c.resourceErr(err, "Creating", resource)
 		}
@@ -226,7 +226,7 @@ func (c *Resources) Update(resource Resource) (Resource, error) {
 	var updatedUn *unstructured.Unstructured
 
 	err = util.Retry(time.Second, time.Minute, func() (bool, error) {
-		updatedUn, err = resClient.Update(resource.unstructuredPtr())
+		updatedUn, err = resClient.Update(resource.unstructuredPtr(), metav1.UpdateOptions{})
 		if err != nil {
 			return c.doneRetryingErr(err), c.resourceErr(err, "Updating", resource)
 		}
@@ -253,7 +253,7 @@ func (c *Resources) Patch(resource Resource, patchType types.PatchType, data []b
 	var patchedUn *unstructured.Unstructured
 
 	err = util.Retry(time.Second, time.Minute, func() (bool, error) {
-		patchedUn, err = resClient.Patch(resource.Name(), patchType, data)
+		patchedUn, err = resClient.Patch(resource.Name(), patchType, data, metav1.UpdateOptions{})
 		if err != nil {
 			return c.doneRetryingErr(err), c.resourceErr(err, "Patching", resource)
 		}

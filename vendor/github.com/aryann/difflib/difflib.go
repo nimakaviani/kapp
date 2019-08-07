@@ -54,8 +54,6 @@ func (t DeltaType) String() string {
 type DiffRecord struct {
 	Payload string
 	Delta   DeltaType
-	LineLeft int
-	LineRight int
 }
 
 // String returns a string representation of d. The string is a
@@ -71,15 +69,15 @@ func Diff(seq1, seq2 []string) (diff []DiffRecord) {
 	// optimization.
 	start, end := numEqualStartAndEndElements(seq1, seq2)
 
-	for i, content := range seq1[:start] {
-		diff = append(diff, DiffRecord{content, Common, i, i})
+	for _, content := range seq1[:start] {
+		diff = append(diff, DiffRecord{content, Common})
 	}
 
-	diffRes := compute(seq1[start:len(seq1)-end], seq2[start:len(seq2)-end], start)
+	diffRes := compute(seq1[start:len(seq1)-end], seq2[start:len(seq2)-end])
 	diff = append(diff, diffRes...)
 
-	for i, content := range seq1[len(seq1)-end:] {
-		diff = append(diff, DiffRecord{content, Common, len(seq1)-end+i, len(seq2)-end+i})
+	for _, content := range seq1[len(seq1)-end:] {
+		diff = append(diff, DiffRecord{content, Common})
 	}
 	return
 }
@@ -172,18 +170,18 @@ func longestCommonSubsequenceMatrix(seq1, seq2 []string) [][]int {
 
 // compute is the unexported helper for Diff that returns the results of
 // diffing left and right.
-func compute(seq1, seq2 []string, startLine int) (diff []DiffRecord) {
+func compute(seq1, seq2 []string) (diff []DiffRecord) {
 	matrix := longestCommonSubsequenceMatrix(seq1, seq2)
 	i, j := len(seq1), len(seq2)
 	for i > 0 || j > 0 {
 		if i > 0 && matrix[i][j] == matrix[i-1][j] {
-			diff = append(diff, DiffRecord{seq1[len(seq1)-i], LeftOnly, startLine+len(seq1)-i, startLine+len(seq2)-j})
+			diff = append(diff, DiffRecord{seq1[len(seq1)-i], LeftOnly})
 			i--
 		} else if j > 0 && matrix[i][j] == matrix[i][j-1] {
-			diff = append(diff, DiffRecord{seq2[len(seq2)-j], RightOnly, startLine+len(seq1)-i, startLine+len(seq2)-j})
+			diff = append(diff, DiffRecord{seq2[len(seq2)-j], RightOnly})
 			j--
 		} else if i > 0 && j > 0 {
-			diff = append(diff, DiffRecord{seq1[len(seq1)-i], Common, startLine+len(seq1)-i, startLine+len(seq2)-j})
+			diff = append(diff, DiffRecord{seq1[len(seq1)-i], Common})
 			i--
 			j--
 		}
